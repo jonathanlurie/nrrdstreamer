@@ -33,11 +33,14 @@ modified = False
 # so that we can add a None inside (not possible with np.ndarray)
 header["space directions"] = header["space directions"].tolist()
 
+
 if dim_type == "component":
     modified = True
     header["space directions"].insert(0, None)
     if "kinds" in header:
         header["kinds"].insert(0, "vector")
+    else:
+        header["kinds"] = ["vector", "space", "space", "space"]
 
 if dim_type == "time":
     modified = True

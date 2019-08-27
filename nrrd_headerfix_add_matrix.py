@@ -20,6 +20,11 @@ res = float(sys.argv[-1])
 
 data, header = nrrd.read(input)
 
+# we dot need double precision
+if header["type"] == "double":
+    header["type"] = "float"
+    data = data.astype(np.float32)
+
 matrix = [[res, 0, 0], [0, res, 0], [0, 0, res]]
 if header["dimension"] == 4:
     matrix.insert(0, None)
